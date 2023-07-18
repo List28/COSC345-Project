@@ -1,0 +1,4 @@
+cmake-build-debug
+.*
+out
+build-qtGuiApplication-Desktop_Qt_6_5_1_MinGW_64_bit-Debug/
