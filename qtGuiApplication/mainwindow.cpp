@@ -1,3 +1,4 @@
+#include "card.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -13,3 +14,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_add_clicked()
+{
+    Card * card = new Card;
+    ui->CardsLayout->addWidget(card);
+}
