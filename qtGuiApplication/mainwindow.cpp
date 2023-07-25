@@ -7,6 +7,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    for (int var = 0; var < 5; ++var) {
+        Card * card = new Card;
+        ui->CardsLayout->addWidget(card);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -17,6 +22,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_add_clicked()
 {
-    Card * card = new Card;
-    ui->CardsLayout->addWidget(card);
+
 }
