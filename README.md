@@ -7,7 +7,7 @@
 - Our idea for the app is to make public information about MPs published on the parliament website easily viewable and searchable to the public. With the purpose of making people more informed about who they’re voting for especially in regards to the upcoming election. 
 
 ## Reports
-- [Assignment 1 - Report.pdf](https://github.com/Debug-Divas/COSC345-Project/files/12189541/Assignment.1.-.Report.pdf)
+- [Assignment 1 - Report.pdf](https://github.com/Debug-Divas/COSC345-Project/blob/main/Assignment%201%20-%20Report.pdf)
 
 ## How To Run
 - 
