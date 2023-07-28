@@ -31,7 +31,7 @@ if __name__ == "__main__":
         json_data = convert_to_json(extracted_text)
 
         # Replace 'output.json' with the desired JSON output file name
-        with open('output.json', 'w') as output_file:
+        with open('output.txt', 'w') as output_file:
             output_file.write(json_data)
 
         print("Text extracted and formatted as JSON successfully!")
