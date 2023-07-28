@@ -1,0 +1,46 @@
+{
+    "MP_Array": [ {
+        "name": "",
+        "party": "",
+        "electorate": "",
+        "interests": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": [],
+            "10": [],
+            "11": [],
+            "12": [],
+            "13": [],
+            "14": []
+        }
+    },{
+        "MP": "Hon Kiritapu Allan",
+        "party": "Labour",
+        "electorate": "East Coast",
+        "interests": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": ["Westridge Family Trust (beneficiary)"],
+            "5": [],
+            "6": ["Family home - Sponge Bay, Gisborne"],
+            "7": ["AMP KiwiSaver"],
+            "8": [],
+            "9": [],
+            "10": ["Bank of New Zealand - mortgage"],
+            "11": [],
+            "12": [],
+            "13": [],
+            "14": []
+        }
+    },{
+
+    }
+]
+}
