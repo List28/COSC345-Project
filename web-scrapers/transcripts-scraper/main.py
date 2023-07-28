@@ -1,9 +1,11 @@
-## scrape.py
-## has hardcode url endpoint
+'''
+Credit: https://github.com/kayakr/parliament.nz
+License: GNU General Public License v2.0
+
+Original converted data to xml formate, I've altered it to put data in csv formate
+'''
 
 from bs4 import BeautifulSoup
-import requests
-import sys
 import urllib.request
 import csv
 import datetime
@@ -15,83 +17,25 @@ class Preface:
     link = ""
     date = ""
 
-    def asXML(self):
-        x = '<Preface>\n'
-        x = x + '<title>' + self.title + '</title>\n'
-        x = x + '<link>' + self.link + '</link>\n'
-        x = x + '<date>' + self.date + '</date>\n'
-        x = x + '</Preface>\n'
-        return x
-
-
 class Debate:
     title = ""
     subTitle = ""
     speeches = []
-
-    def asXML(self):
-        x = '<Debate>\n'
-        x = x + '<title>' + self.title + '</title>\n'
-        x = x + '<subtitle>' + self.subTitle + '</subtitle>\n'
-        if len(self.speeches) > 0:
-            x = x + '<Speeches>\n'
-            for s in self.speeches:
-                x = x + s.asXML()
-            x = x + '</Speeches>\n'
-        x = x + '</Debate>'
-        return x
-
 
 class BillDebate:
     title = ""
     subTitle = ""
     speeches = []
 
-    def asXML(self):
-        x = '<BillDebate>\n'
-        x = x + '<title>' + self.title + '</title>\n'
-        x = x + '<subtitle>' + self.subTitle + '</subtitle>\n'
-        if len(self.speeches) > 0:
-            x = x + '<Speeches>\n'
-            for s in self.speeches:
-                x = x + s.asXML()
-            x = x + '</Speeches>\n'
-        x = x + '</BillDebate>'
-        return x
-
-
 class Speech:
     by = ""
     time = ""
     content = []
 
-    def asXML(self):
-        x = '<Speech>\n'
-        x = x + '<by>' + self.by + '</by>\n'
-        x = x + '<time>' + self.time + '</time>\n'
-        if len(self.content) > 0:
-            x = x + '<SpeechContents>\n'
-            for sc in self.content:
-                x = x + sc.asXML()
-            x = x + '</SpeechContents>\n'
-
-        x = x + '</Speech>\n'
-        return x
-
-
 class SpeechContent:
     type = ""
     name = ""
     text = ""
-
-    def asXML(self):
-        x = '<Content>\n'
-        x = x + '<type>' + self.type + '</type>\n'
-        x = x + '<name>' + self.name + '</name>\n'
-        x = x + '<text>' + self.text + '</text>\n'
-        x = x + '</Content>\n'
-        return x
-
 
 def flatten(tag):
     content = ""
@@ -177,10 +121,8 @@ def parseIntervention(tag):
 user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
 headers = {'User-Agent': user_agent}
 
-
 def get_soup_from_url(url):
     request = urllib.request.Request(url, headers=headers)
-
     response = urllib.request.urlopen(request)
     html_content = response.read()
     return BeautifulSoup(html_content, "html.parser")
@@ -205,14 +147,9 @@ def main(dates):
     for date in dates:
         print(date)
         url = "https://www.parliament.nz/en/pb/hansard-debates/rhr/combined/HansD_" + date
-        # r = requests.get(url)
-        # if r.status_code != 200:
-        #    return
 
         preface.link = url
 
-        # data = r.text
-        # soup = BeautifulSoup(data, "html.parser")
         soup = get_soup_from_url(url)
         preface.title = flatten(soup.title)
 
@@ -224,9 +161,8 @@ def main(dates):
                 current = None
                 currentSpeech = None
                 for para in p:
-                    c = ""
-                    if para.find('class'):
-                        c = para['class'][0]
+                    #c = para['class'][0]
+                    c = para.get('class', [''])[0] #credit: chatgpt
                     if c == "BeginningOfDay":
                         preface.date = flatten(para)
                     elif c == "BillDebate":
@@ -274,28 +210,6 @@ def main(dates):
                             currentSpeech.content.append(s)
 
     return debates
-    # Asked chatgpt to change to write to file instead of
-    '''
-    with open(f"{date}.xml", "w", encoding="utf-8") as file:
-        file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-        file.write('<Hansard>\n')
-        xml = preface.asXML().encode('utf-8').decode('utf-8')
-        file.write(xml + '\n')
-        file.write("<Debates>\n")
-        for b in debates:
-            xml = b.asXML().encode('utf-8').decode('utf-8')
-            file.write(xml + '\n')
-
-        file.write('</Debates>\n')
-
-        file.write("<Bills>\n")
-        for b in bills:
-            xml = b.asXML().encode('utf-8').decode('utf-8')
-            file.write(xml + '\n')
-
-        file.write('</Bills>\n')
-        file.write('</Hansard>\n')
-'''
 
 def write_debates_to_csv(debates):
     with open("debates.csv", mode='w', newline='', encoding="utf-8" ) as file:
@@ -326,7 +240,7 @@ def write_debates_to_csv(debates):
 if __name__ == "__main__":
 
     #valid_dates = get_new_urls("")
-    valid_dates = ["20230307_20230307", "20230309_20230309", "20230308_20230308"]
+    valid_dates = ["20220511_20220511", "20220510_20220510", "20220505_20220505"]
 
     debates = main(valid_dates)
     write_debates_to_csv(debates)
