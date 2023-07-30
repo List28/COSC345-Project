@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>612</width>
+    <width>650</width>
     <height>191</height>
    </rect>
   </property>
@@ -30,11 +30,14 @@
          <height>64</height>
         </size>
        </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
        <property name="text">
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap resource="icons.qrc">:/brainstorm.png</pixmap>
+        <pixmap>../images/wood-michael-TEST.jpg</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -96,80 +99,15 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="label_5">
-       <property name="maximumSize">
-        <size>
-         <width>32</width>
-         <height>22</height>
-        </size>
-       </property>
+      <widget class="QPushButton" name="expandButton">
        <property name="text">
-        <string/>
+        <string>Expand</string>
        </property>
-       <property name="pixmap">
-        <pixmap resource="icons.qrc">:/like-solid.svg</pixmap>
-       </property>
-       <property name="scaledContents">
+       <property name="default">
         <bool>true</bool>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_4">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>22</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Like</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_7">
-       <property name="maximumSize">
-        <size>
-         <width>32</width>
-         <height>22</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="icons.qrc">:/chat-solid.svg</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_6">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>22</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>comment</string>
+       <property name="flat">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -177,8 +115,23 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="icons.qrc"/>
- </resources>
- <connections/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>expandButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Card</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>484</x>
+     <y>165</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>324</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

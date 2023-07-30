@@ -17,15 +17,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     card.cpp \
+    expandedcard.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     card.h \
+    expandedcard.h \
     mainwindow.h
 
 FORMS += \
     card.ui \
+    expandedcard.ui \
     mainwindow.ui
 
 # Default rules for deployment.

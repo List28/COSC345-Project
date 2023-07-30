@@ -1,8 +1,10 @@
 #include "card.h"
 #include "ui_card.h"
-
+#include "expandedcard.h"
+#include "mainwindow.h"
 #include <QPainter>
-
+#include <QVBoxLayout>
+#include <QPushButton>
 Card::Card(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Card)
@@ -21,4 +23,10 @@ void Card::paintEvent(QPaintEvent *event)
     QPainter p(this);
     p.drawRect(0,0,width()-1, height()-1);
 
+}
+
+
+void Card::on_expandButton_clicked()
+{
+    emit expandButtonClicked();
 }

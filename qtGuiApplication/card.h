@@ -14,7 +14,10 @@ class Card : public QWidget
 public:
     explicit Card(QWidget *parent = nullptr);
     ~Card();
-
+signals:
+    void expandButtonClicked();
+private slots:
+    void on_expandButton_clicked();
 private:
     Ui::Card *ui;
 
