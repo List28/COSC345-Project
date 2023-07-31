@@ -26,5 +26,6 @@ private:
 
 private slots:
     void handleExpandButtonClicked();
+    void handleOkButtonClicked();
 };
 #endif // MAINWINDOW_H

@@ -39,12 +39,34 @@ void MainWindow::handleExpandButtonClicked()
                                    [senderCard](Card *c) { return c == senderCard; }),
                     cards.end());
 
+        // Disconnect the Card's signal since it's being replaced by an ExpandedCard
+        disconnect(senderCard, &Card::expandButtonClicked, this, &MainWindow::handleExpandButtonClicked);
         senderCard->deleteLater(); // Delete the Card instance, assuming it's no longer needed
 
-        // Assuming you have a layout for ExpandedCard, add it to the layout
-        ui->CardsLayout->addWidget(expandedCard);
+        // Assuming you have a layout for ExpandedCard, insert it at the top of the layout
+        ui->CardsLayout->insertWidget(0, expandedCard);
 
         // If the layout needs to be resized after adding the ExpandedCard, you can call
         // ui->CardsLayout->update(); or ui->CardsLayout->activate();
+
+        // Connect the okButtonClicked() signal from ExpandedCard to the slot handleOkButtonClicked() in MainWindow
+        connect(expandedCard, &ExpandedCard::okButtonClicked, this, &MainWindow::handleOkButtonClicked);
+    }
+}
+
+
+void MainWindow::handleOkButtonClicked()
+{
+    ExpandedCard *expandedCard = qobject_cast<ExpandedCard*>(sender());
+    if (expandedCard) {
+        ui->CardsLayout->removeWidget(expandedCard); // Remove the ExpandedCard from the layout
+        disconnect(expandedCard, &ExpandedCard::okButtonClicked, this, &MainWindow::handleOkButtonClicked); // Disconnect the signal
+
+        int index = 0; // Insert the Card back at the top
+        Card *card = new Card;
+        ui->CardsLayout->insertWidget(index, card);
+        cards.insert(cards.begin(), card);
+
+        expandedCard->deleteLater(); // Delete the ExpandedCard instance
     }
 }
