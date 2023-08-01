@@ -16,7 +16,11 @@ public:
     ~ExpandedCard();
 private:
     Ui::ExpandedCard *ui;
+signals:
+    void okButtonClicked(); // Add the signal for the "OK" button
 
+private slots:
+    void on_okButton_accepted();
 };
 
 #endif // EXPANDEDCARD_H
