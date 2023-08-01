@@ -9,11 +9,13 @@ that to main.py.
 '''
 
 # import libraries
+import json
 from pathlib import Path
 from urllib.request import urlopen
 from bs4 import BeautifulSoup as bs
 from datetime import datetime
 import urllib.request
+import csv
 
 hansard_url = 'https://www.parliament.nz'
 
@@ -56,3 +58,10 @@ def get_new_urls(last_url):
         else:
             #return new_list
             return valid_dates
+
+def writeUrlsToJson(URLS):
+    with open("validDates.json", mode='w', newline='', encoding="utf-8" ) as file:
+        json.dump(URLS, file)
+
+if __name__ == "__main__":
+    writeUrlsToJson(get_new_urls(""))

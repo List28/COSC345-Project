@@ -5,6 +5,7 @@ License: GNU General Public License v2.0
 Original converted data to xml formate, I've altered it to put data in csv formate
 '''
 
+import json
 from bs4 import BeautifulSoup
 import urllib.request
 import csv
@@ -47,6 +48,7 @@ def flatten(tag):
     return content
 
 
+
 def parseSpeech(tag):
     if tag.find('a'):
         a = tag.a['name']
@@ -59,16 +61,8 @@ def parseSpeech(tag):
 
     s = Speech()
     s.content = []
-    c = SpeechContent()
+    c = parseSpeechContent(tag)
     c.type = "Speech"
-    f = flatten(tag)
-    if not f.find(":") == -1:
-        p = f.index(':')
-        c.text = f[p + 1:]
-        c.name = f[0:p]
-    else:
-        c.text = f
-        c.name = "na"
 
     s.by = c.name
     s.time = t
@@ -92,10 +86,8 @@ def parseInterjection(tag):
     c.name = f[0:p]
     return c
 
-
-def parseContinueSpeech(tag):
+def parseSpeechContent(tag):
     c = SpeechContent()
-    c.type = "ContinueSpeech"
     f = flatten(tag)
     if not f.find(":") == -1:
         p = f.index(':')
@@ -106,12 +98,18 @@ def parseContinueSpeech(tag):
         c.name = "na"
     return c
 
+def parseContinueSpeech(tag):
+    c = parseSpeechContent(tag)
+    c.type = "ContinueSpeech"
+    return c
 
 def parseIntervention(tag):
     c = SpeechContent()
     c.type = "Intervention"
     f = flatten(tag)
-    p = f.index(':')
+    p = 0
+    if ':' in f:
+        p = f.index(':')
     c.text = f[p + 1:]
     c.name = f[0:p]
     return c
@@ -144,8 +142,10 @@ def main(dates):
     debates = []
     preface = Preface()
 
+    date_index = 0
     for date in dates:
-        print(date)
+        print(str(date_index) + ": " + date)
+        date_index += 1
         url = "https://www.parliament.nz/en/pb/hansard-debates/rhr/combined/HansD_" + date
 
         preface.link = url
@@ -183,12 +183,8 @@ def main(dates):
                             current.subTitle = flatten(para)
                     elif c == "Speech":
                         if current != None:
-                            if para.find('a'):
-                                currentSpeech = parseSpeech(para)
-                                current.speeches.append(currentSpeech)
-                            else:
-                                s = parseContinueSpeech(para)
-                                currentSpeech.content.append(s)
+                            currentSpeech = parseSpeech(para)
+                            current.speeches.append(currentSpeech)
                     elif c == "a":
                         if currentSpeech != None:
                             s = parseA(para)
@@ -208,42 +204,59 @@ def main(dates):
                         if currentSpeech != None:
                             s = parseIntervention(para)
                             currentSpeech.content.append(s)
+        write_single_day_to_csv(debates)
 
-    return debates
-
-def write_debates_to_csv(debates):
-    with open("debates.csv", mode='w', newline='', encoding="utf-8" ) as file:
+def write_single_day_to_csv(debates):
+    with open("debates.csv", mode='a', newline='', encoding="utf-8" ) as file:
         csv_writer = csv.writer(file)
 
-        csv_writer.writerow(['Title', 'Subtitle', 'DateTime'])
         for debate in debates:
-            csv_writer.writerow([debate.title, debate.subTitle, convert_to_datetime(debate.speeches[0].time)])
+            if len(debate.speeches[0].time) > 0:
+                csv_writer.writerow([debate.title, debate.subTitle, convert_to_datetime(debate.speeches[0].time)])
+            else:
+                print(debate.title + " " + debate.subTitle)
 
-    with open("speeches.csv", mode='w', newline='', encoding="utf-8") as file:
+    with open("speeches.csv", mode='a', newline='', encoding="utf-8") as file:
         csv_writer = csv.writer(file)
 
-        csv_writer.writerow(['By', 'DateTime', 'Debate_Title', 'Debate_Time'])
         for debate in debates:
             for speech in debate.speeches:
-                csv_writer.writerow([speech.by, speech.time, debate.title, convert_to_datetime(debate.speeches[0].time)])
+                if len(debate.speeches) > 0:
+                    csv_writer.writerow([speech.by, speech.time, debate.title, convert_to_datetime(debate.speeches[0].time)])
+                else:
+                    print(speech.by + " " + speech.time + " " + debate.title)
 
-    with open("speechContent.csv", mode='w', newline='', encoding="utf-8") as file:
+    with open("speechContent.csv", mode='a', newline='', encoding="utf-8") as file:
         csv_writer = csv.writer(file)
 
-        csv_writer.writerow(['Type', 'By', 'Text', 'Speech_Time'])
         for debate in debates:
             for speech in debate.speeches:
                 for content in speech.content:
                     csv_writer.writerow([content.type, content.name, content.text, convert_to_datetime(speech.time)])
 
+def init_csv_files():
+    with open("debates.csv", mode='w', newline='', encoding="utf-8" ) as file:
+        csv_writer = csv.writer(file)
+        csv_writer.writerow(['Title', 'Subtitle', 'DateTime'])
+
+    with open("speeches.csv", mode='w', newline='', encoding="utf-8") as file:
+        csv_writer = csv.writer(file)
+        csv_writer.writerow(['By', 'DateTime', 'Debate_Title', 'Debate_Time'])
+
+    with open("speechContent.csv", mode='w', newline='', encoding="utf-8") as file:
+        csv_writer = csv.writer(file)
+        csv_writer.writerow(['Type', 'By', 'Text', 'Speech_Time'])
 
 if __name__ == "__main__":
 
+    with open("validDates.json", "r") as file:
+        valid_dates = json.load(file)
+
     #valid_dates = get_new_urls("")
-    valid_dates = ["20220511_20220511", "20220510_20220510", "20220505_20220505"]
+    #valid_dates = ["20211109_20211109", "20220505_20220505", "20220510_20220510", "20201125_20201125"]
 
     debates = main(valid_dates)
-    write_debates_to_csv(debates)
+    
 
     #for date in valid_dates:
     #    print(date)
