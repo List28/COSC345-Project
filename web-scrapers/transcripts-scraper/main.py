@@ -129,6 +129,8 @@ def get_soup_from_url(url):
 def convert_to_datetime(date_string):
     if date_string == "na":
         return "na"
+    if date_string[:2] == "22": # One page has an extra 2 at the start of the date
+        date_string = date_string[1:]
     year = int(date_string[0:4])
     month = int(date_string[4:6])
     day = int(date_string[6:8])
@@ -137,24 +139,17 @@ def convert_to_datetime(date_string):
     second = int(date_string[15:17])
     return datetime.datetime(year, month, day, hour, minute, second)
 
-def main(dates):
+# creates list of debates from a single url
+def get_debates_from_url(url):
     bills = []
     debates = []
     preface = Preface()
 
-    date_index = 0
-    for date in dates:
-        print(str(date_index) + ": " + date)
-        date_index += 1
-        url = "https://www.parliament.nz/en/pb/hansard-debates/rhr/combined/HansD_" + date
+    preface.link = url
+    soup = get_soup_from_url(url)
+    preface.title = flatten(soup.title)
 
-        preface.link = url
-
-        soup = get_soup_from_url(url)
-        preface.title = flatten(soup.title)
-
-        count = 1
-        for body in soup.find_all('body'):
+    for body in soup.find_all('body'):
             n = body.find_all('body')
             for b2 in n:
                 p = b2.find_all('p')
@@ -204,19 +199,20 @@ def main(dates):
                         if currentSpeech != None:
                             s = parseIntervention(para)
                             currentSpeech.content.append(s)
-        write_single_day_to_csv(debates)
+    return debates
 
-def write_single_day_to_csv(debates):
-    with open("debates.csv", mode='a', newline='', encoding="utf-8" ) as file:
+# writes the data from a list of debates (appends it to file doesn't write over it)
+def write_debates_to_csv(debates):
+    with open("web-scrapers/transcripts-scraper/debates.csv", mode='a', newline='', encoding="utf-8" ) as file:
         csv_writer = csv.writer(file)
 
         for debate in debates:
-            if len(debate.speeches[0].time) > 0:
+            if len(debate.speeches) > 0:
                 csv_writer.writerow([debate.title, debate.subTitle, convert_to_datetime(debate.speeches[0].time)])
             else:
                 print(debate.title + " " + debate.subTitle)
 
-    with open("speeches.csv", mode='a', newline='', encoding="utf-8") as file:
+    with open("web-scrapers/transcripts-scraper/speeches.csv", mode='a', newline='', encoding="utf-8") as file:
         csv_writer = csv.writer(file)
 
         for debate in debates:
@@ -226,7 +222,7 @@ def write_single_day_to_csv(debates):
                 else:
                     print(speech.by + " " + speech.time + " " + debate.title)
 
-    with open("speechContent.csv", mode='a', newline='', encoding="utf-8") as file:
+    with open("web-scrapers/transcripts-scraper/speechContent.csv", mode='a', newline='', encoding="utf-8") as file:
         csv_writer = csv.writer(file)
 
         for debate in debates:
@@ -234,34 +230,40 @@ def write_single_day_to_csv(debates):
                 for content in speech.content:
                     csv_writer.writerow([content.type, content.name, content.text, convert_to_datetime(speech.time)])
 
+# creates new csv files and adds the headers
 def init_csv_files():
-    with open("debates.csv", mode='w', newline='', encoding="utf-8" ) as file:
+    with open("web-scrapers/transcripts-scraper/debates.csv", mode='w', newline='', encoding="utf-8" ) as file:
         csv_writer = csv.writer(file)
         csv_writer.writerow(['Title', 'Subtitle', 'DateTime'])
 
-    with open("speeches.csv", mode='w', newline='', encoding="utf-8") as file:
+    with open("web-scrapers/transcripts-scraper/speeches.csv", mode='w', newline='', encoding="utf-8") as file:
         csv_writer = csv.writer(file)
         csv_writer.writerow(['By', 'DateTime', 'Debate_Title', 'Debate_Time'])
 
-    with open("speechContent.csv", mode='w', newline='', encoding="utf-8") as file:
+    with open("web-scrapers/transcripts-scraper/speechContent.csv", mode='w', newline='', encoding="utf-8") as file:
         csv_writer = csv.writer(file)
         csv_writer.writerow(['Type', 'By', 'Text', 'Speech_Time'])
 
+# goes through list of dates gets debates adds them to csv
+def main(dates):
+    for d in range(len(dates)):
+        print(str(d) + ": " + dates[d])
+        url = "https://www.parliament.nz/en/pb/hansard-debates/rhr/combined/HansD_" + dates[d]
+        debates = get_debates_from_url(url)
+        write_debates_to_csv(debates)
+
 if __name__ == "__main__":
 
-    with open("validDates.json", "r") as file:
+    with open("web-scrapers/transcripts-scraper/validDates.json", "r") as file:
         valid_dates = json.load(file)
+
+    init_csv_files()
 
     #valid_dates = get_new_urls("")
     #valid_dates = ["20211109_20211109", "20220505_20220505", "20220510_20220510", "20201125_20201125"]
 
     debates = main(valid_dates)
     
-
-    #for date in valid_dates:
-    #    print(date)
-    #    main(date)
-
     '''
     if len(sys.argv) == 2:
         date = sys.argv[1]
