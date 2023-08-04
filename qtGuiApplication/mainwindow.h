@@ -23,9 +23,11 @@ public:
 private:
     Ui::MainWindow *ui;
     std::vector<Card*> cards;
+    int expandedCardIndex; // Variable to store the index of the expanded card
 
 private slots:
     void handleExpandButtonClicked();
     void handleOkButtonClicked();
+    void on_peopleButton_clicked();
 };
 #endif // MAINWINDOW_H

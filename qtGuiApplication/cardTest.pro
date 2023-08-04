@@ -17,17 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     card.cpp \
+    dialog.cpp \
     expandedcard.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     card.h \
+    dialog.h \
     expandedcard.h \
     mainwindow.h
 
 FORMS += \
     card.ui \
+    dialog.ui \
     expandedcard.ui \
     mainwindow.ui
 
