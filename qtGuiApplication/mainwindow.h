@@ -1,11 +1,10 @@
-// mainwindow.h
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
 #include <vector> // Include the <vector> header
 
-// Include other necessary headers for your classes here
+// Include necessary headers for your classes here
 #include "card.h"
 #include "expandedcard.h"
 
@@ -20,14 +19,19 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
 private:
     Ui::MainWindow *ui;
-    std::vector<Card*> cards;
-    int expandedCardIndex; // Variable to store the index of the expanded card
+    std::vector<Card*> cards; // Use std::vector for managing Card pointers
+    ExpandedCard *expandedCard; // Declare expandedCard here
+    QMap<Card*, ExpandedCard*> expandedCardsMap;
 
 private slots:
     void handleExpandButtonClicked();
     void handleOkButtonClicked();
     void on_peopleButton_clicked();
+    void on_partiesButton_clicked();
+    void clearCardsLayout();
 };
+
 #endif // MAINWINDOW_H
