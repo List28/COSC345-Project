@@ -11,3 +11,7 @@
 
 ## How To Run
 - 
+
+
+## Github Actions
+![Build](https://github.com/andrewtrotman/cosc345/actions/workflows/swift.yml/badge.svg)
