@@ -225,7 +225,7 @@ def write_debates_to_csv(debates):
         for debate in debates:
             for speech in debate.speeches:
                 if len(debate.speeches) > 0:
-                    csv_writer.writerow([getJustMpName(speech.by), speech.time, convert_to_datetime(debate.speeches[0].time)])
+                    csv_writer.writerow([getJustMpName(speech.by), convert_to_datetime(speech.time), convert_to_datetime(debate.speeches[0].time)])
                 else:
                     print(speech.by + " " + speech.time + " " + debate.title)
 
