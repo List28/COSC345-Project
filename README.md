@@ -14,4 +14,4 @@
 
 
 ## Github Actions
-[![Build](https://github.com/Debug-Divas/COSC345-Project/actions/workflows/main.yml/badge.svg)
+![Build](https://github.com/Debug-Divas/COSC345-Project/actions/workflows/main.yml/badge.svg)
