@@ -11,3 +11,8 @@
 
 ## How To Run
 - 
+
+
+## Github Actions
+![Build](https://github.com/Debug-Divas/COSC345-Project/actions/workflows/windows_release.yml/badge.svg)
+![Build](https://github.com/Debug-Divas/COSC345-Project/actions/workflows/superlinter.yml/badge.svg)
