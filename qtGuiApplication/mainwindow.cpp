@@ -11,8 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    expandedCard = nullptr;
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -24,43 +24,34 @@ void MainWindow::handleExpandButtonClicked()
 {
     Card *senderCard = qobject_cast<Card*>(sender());
     if (senderCard) {
-        ExpandedCard *expandedCard = new ExpandedCard;
+        if (expandedCard) {
+            delete expandedCard;
+        }
 
-        // ... (rest of the code as before)
+        expandedCard = new ExpandedCard;
+        ui->CardsLayout->addWidget(expandedCard);
+        senderCard->hide();
 
-        connect(expandedCard, &ExpandedCard::okButtonClicked, this, &MainWindow::handleOkButtonClicked);
-        disconnect(senderCard, &Card::expandButtonClicked, this, &MainWindow::handleExpandButtonClicked);
-        senderCard->hide(); // Hide the sender card
-        expandedCard->show(); // Show the expanded card
-    }
-}
-
-void MainWindow::handleOkButtonClicked()
-{
-    ExpandedCard *expandedCard = qobject_cast<ExpandedCard*>(sender());
-    if (expandedCard) {
-        Card *senderCard = expandedCardsMap.key(expandedCard);
-
-        if (senderCard) {
-            int expandedCardIndex = ui->CardsLayout->indexOf(expandedCard);
-
-            // Disconnect the signals from the expanded card
-            disconnect(expandedCard, &ExpandedCard::okButtonClicked, this, &MainWindow::handleOkButtonClicked);
-            expandedCard->hide(); // Hide the expanded card
-
-            // Remove the expanded card from the layout
-            ui->CardsLayout->removeWidget(expandedCard);
-            expandedCard->deleteLater();
-
-            // Insert the sender card back into the layout
-            ui->CardsLayout->insertWidget(expandedCardIndex, senderCard);
-
-            // Restore the signal-slot connection for expanding the card
-            connect(senderCard, &Card::expandButtonClicked, this, &MainWindow::handleExpandButtonClicked);
+        // Hide all existing cards
+        for (Card *card : cards) {
+            card->hide();
         }
     }
 }
 
+
+void MainWindow::handleOkButtonClicked()
+{
+    for (Card *card : cards) {
+        card->show();
+    }
+
+    if (expandedCard) {
+        ui->CardsLayout->removeWidget(expandedCard);
+        delete expandedCard;
+        expandedCard = nullptr;
+    }
+}
 
 void MainWindow::on_peopleButton_clicked()
 {
@@ -87,10 +78,15 @@ void MainWindow::clearCardsLayout()
 {
     for (Card *card : cards) {
         disconnect(card, &Card::expandButtonClicked, this, &MainWindow::handleExpandButtonClicked);
-        card->hide(); // Hide the card before deleting
+        card->hide();
         card->deleteLater();
     }
     cards.clear();
+
+    if (expandedCard) {
+        delete expandedCard;
+        expandedCard = nullptr;
+    }
 
     QLayoutItem *item;
     while ((item = ui->CardsLayout->takeAt(0)) != nullptr) {
@@ -100,6 +96,4 @@ void MainWindow::clearCardsLayout()
         }
         delete item;
     }
-
-    expandedCardsMap.clear();
 }
