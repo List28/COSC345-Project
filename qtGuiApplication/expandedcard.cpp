@@ -17,6 +17,7 @@ ExpandedCard::~ExpandedCard()
 
 void ExpandedCard::on_okButton_accepted()
 {
+    //Test1
     qDebug() << "OK Button Accepted"; // Debug message
     // Emit the custom signal okButtonClicked() when the "OK" button is clicked
     emit okButtonClicked();
