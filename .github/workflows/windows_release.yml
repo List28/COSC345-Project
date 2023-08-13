@@ -19,7 +19,7 @@ defaults:
 env:
   SOURCE_DIR:   ${{ github.workspace }}
   QT_VERSION:   5.15.2
-  ARTIFACT:     qt-planets-build.zip
+  ARTIFACT:     qt-mpGui-build.zip
 
 jobs:
   build:
@@ -80,7 +80,7 @@ jobs:
       - name: (9) Zip build
         working-directory: ${{ runner.temp }}
         run:  |
-              7z a qt-planets-build.zip ${{ runner.temp }}\build\* -r
+              7z a qt-mpGui-build.zip ${{ runner.temp }}\build\* -r
               
       - name: (10) Save build artifact
         uses: actions/upload-artifact@master
