@@ -57,14 +57,27 @@ void MainWindow::on_peopleButton_clicked()
 {
     clearCardsLayout();
 
-    for (int var = 0; var < 5; ++var) {
+    int maxColumns = 3; // Maximum number of cards per row
+    int currentColumn = 0;
+    int currentRow = 0;
+
+    for (int var = 0; var < 30; ++var) {
         Card *card = new Card;
-        ui->CardsLayout->addWidget(card);
+        ui->CardsLayout->addWidget(card, currentRow, currentColumn);
+
+        // Update column and row positions
+        ++currentColumn;
+        if (currentColumn >= maxColumns) {
+            currentColumn = 0;
+            ++currentRow;
+        }
+
         cards.push_back(card);
 
         connect(card, &Card::expandButtonClicked, this, &MainWindow::handleExpandButtonClicked);
     }
 }
+
 
 void MainWindow::on_partiesButton_clicked()
 {
