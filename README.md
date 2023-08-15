@@ -10,7 +10,11 @@
 - [Assignment 1 - Report.pdf](https://github.com/Debug-Divas/COSC345-Project/blob/main/Assignment%201%20-%20Report.pdf)
 
 ## How To Run
-- 
+- In the COSC345-Project Repo go to Actions
+- On the left side-bar click on Windows Release then click on the latest passed workflow run
+- In the Artifacts section click on the zip file to download.
+- After you've downloaded the zip file you will need to extract it twice. Then when you have the full functioning folder presumably named qt-mpGui-build look for the release folder inside it and open the terminal and cd into that folder
+-  then run the command ./cardTest.exe
 
 
 ## Github Actions
