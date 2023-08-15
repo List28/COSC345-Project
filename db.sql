@@ -1,7 +1,5 @@
 -- ALTER DATABASE db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-ALTER TABLE
-    finances CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- DROP TABLE IF EXISTS speeches;
 
@@ -99,10 +97,13 @@ CREATE TABLE
         debts_to_you VARCHAR(400),
         debts_owed_by_you VARCHAR(300),
         overseas_travel VARCHAR(1000),
-        gifts VARCHAR(1000),
+        gifts VARCHAR(1000), 
         to_remove VARCHAR(5),
-        payment_activities VARCHAR(500)
+        payment_activities VARCHAR(500) 
     );
+
+ALTER TABLE
+    finances CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 LOAD DATA
     LOCAL INFILE './web-scrapers/financial-scraper/output.csv' INTO
