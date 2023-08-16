@@ -70,14 +70,16 @@ jobs:
         run:  |
               qmake -r ${{ env.SOURCE_DIR }}\qtGuiApplication\cardTest.pro
               ${{ runner.temp }}\jom\jom -j2
+              mkdir images
+              copy ${{ env.SOURCE_DIR }}\images\* images
               cd release
               windeployqt --qmldir ${{ env.SOURCE_DIR }}\build\release cardTest.exe --pdb --release --compiler-runtime
               copy C:\Windows\System32\concrt140.dll . 
               copy C:\Windows\System32\vccorlib140.dll .
               copy C:\Windows\System32\msvcp140.dll .
               copy C:\Windows\System32\vcruntime140.dll .
-              mkdir images
-              copy ${{ env.SOURCE_DIR }}\images\* images
+              
+              
       - name: (9) Zip build
         working-directory: ${{ runner.temp }}
         run:  |
