@@ -76,7 +76,7 @@ jobs:
               copy C:\Windows\System32\vccorlib140.dll .
               copy C:\Windows\System32\msvcp140.dll .
               copy C:\Windows\System32\vcruntime140.dll .
-              
+              copy ${{ env.SOURCE_DIR }}\images\* .
       - name: (9) Zip build
         working-directory: ${{ runner.temp }}
         run:  |
