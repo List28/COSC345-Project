@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     expandedCard = nullptr;
 }
 
@@ -29,6 +30,7 @@ void MainWindow::handleExpandButtonClicked()
         }
 
         expandedCard = new ExpandedCard;
+        connect(expandedCard, &ExpandedCard::okButtonClicked, this, &MainWindow::handleOkButtonClicked);
         ui->CardsLayout->addWidget(expandedCard);
         senderCard->hide();
 
@@ -42,15 +44,15 @@ void MainWindow::handleExpandButtonClicked()
 
 void MainWindow::handleOkButtonClicked()
 {
-    for (Card *card : cards) {
-        card->show();
-    }
+        for (Card *card : cards) {
+            card->show();
+        }
 
-    if (expandedCard) {
-        ui->CardsLayout->removeWidget(expandedCard);
-        delete expandedCard;
-        expandedCard = nullptr;
-    }
+        if (expandedCard) {
+            ui->CardsLayout->removeWidget(expandedCard);
+            delete expandedCard;
+            expandedCard = nullptr;
+        }
 }
 
 void MainWindow::on_peopleButton_clicked()

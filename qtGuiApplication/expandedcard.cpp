@@ -1,5 +1,6 @@
 #include "expandedcard.h"
 #include "ui_expandedcard.h"
+#include "mainwindow.h"
 #include <QDialogButtonBox>
 
 ExpandedCard::ExpandedCard(QWidget *parent) : QDialog(parent), ui(new Ui::ExpandedCard)
