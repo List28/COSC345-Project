@@ -1,6 +1,8 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = sqlite_qt
 
 CONFIG += c++11
 
@@ -17,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     card.cpp \
+    dbmanager.cpp \
     dialog.cpp \
     expandedcard.cpp \
     main.cpp \
@@ -24,6 +27,7 @@ SOURCES += \
 
 HEADERS += \
     card.h \
+    dbmanager.h \
     dialog.h \
     expandedcard.h \
     mainwindow.h
