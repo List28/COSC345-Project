@@ -9,21 +9,22 @@ on:
       - 'v*'
   pull_request:
     branches:
-      - 'main'
-      - 'hamzah'
+    - 'main'
+    - 'hamzah'
 
 defaults:
   run:
     shell: cmd
 
 env:
-  SOURCE_DIR: ${{ github.workspace }}
-  QT_VERSION: 6.5.1
-  ARTIFACT: qt-mpGui-build.zip
+  SOURCE_DIR:   ${{ github.workspace }}
+  QT_VERSION:   6.5.1
+  ARTIFACT:     qt-mpGui-build.zip
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on:  windows-2019
+
     steps:
       - name: (1) Checkout repo
         uses: actions/checkout@v2
@@ -31,34 +32,33 @@ jobs:
           submodules: recursive
 
       - name: (2) Get all tags for correct version determination
-        working-directory: ${{ github.workspace }}
+        working-directory:  ${{ github.workspace }}
         run: |
           git fetch --all --tags -f
-
       - name: (3) Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-          version: ${{ env.QT_VERSION }}
-          host: windows
-          target: desktop
-          arch: win64_msvc2019_64
-          dir: ${{ runner.temp }}
-          modules: qtcharts qt3d
+          version:      ${{ env.QT_VERSION }}
+          host:         windows
+          target:       desktop
+          arch:         win64_msvc2019_64
+          dir:          ${{ runner.temp }}
+          modules:      qtcharts qt3d
           setup-python: false
 
       - name: (4) Download JOM
         uses: suisei-cn/actions-download-file@v1
         with:
-          url: http://download.qt.io/official_releases/jom/jom.zip
+          url:    http://download.qt.io/official_releases/jom/jom.zip
           target: ${{ runner.temp }}\
 
       - name: (5) Unzip JOM
         working-directory: ${{ runner.temp }}
         run:  |
-          7z x jom.zip -ojom
-
+              7z x jom.zip -ojom
+              
       - name: (6) Create build directory
-        run: mkdir ${{ runner.temp }}\build
+        run:  mkdir ${{ runner.temp }}\build
 
       - name: (7) Set up Visual Studio shell
         uses: egor-tensin/vs-shell@v2
@@ -67,64 +67,26 @@ jobs:
 
       - name: (8) Build
         working-directory: ${{ runner.temp }}\build
-        run: |
-          qmake -r ${{ env.SOURCE_DIR }}\qtGuiApplication\cardTest.pro
-          ${{ runner.temp }}\jom\jom -j2
-          mkdir images
-          copy ${{ env.SOURCE_DIR }}\images\* images
-          cd release
-          windeployqt --qmldir ${{ env.SOURCE_DIR }}\build\release cardTest.exe --pdb --release --compiler-runtime
-          copy C:\Windows\System32\concrt140.dll .
-          copy C:\Windows\System32\vccorlib140.dll .
-          copy C:\Windows\System32\msvcp140.dll .
-          copy C:\Windows\System32\vcruntime140.dll .
-
+        run:  |
+              qmake -r ${{ env.SOURCE_DIR }}\qtGuiApplication\cardTest.pro
+              ${{ runner.temp }}\jom\jom -j2
+              mkdir images
+              copy ${{ env.SOURCE_DIR }}\images\* images
+              cd release
+              windeployqt --qmldir ${{ env.SOURCE_DIR }}\build\release cardTest.exe --pdb --release --compiler-runtime
+              copy C:\Windows\System32\concrt140.dll . 
+              copy C:\Windows\System32\vccorlib140.dll .
+              copy C:\Windows\System32\msvcp140.dll .
+              copy C:\Windows\System32\vcruntime140.dll .
+              
+              
       - name: (9) Zip build
         working-directory: ${{ runner.temp }}
-        run: |
-          7z a qt-mpGui-build.zip ${{ runner.temp }}\build\* -r
-
+        run:  |
+              7z a qt-mpGui-build.zip ${{ runner.temp }}\build\* -r
+              
       - name: (10) Save build artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@master
         with:
           name: ${{ env.ARTIFACT }}
           path: ${{ runner.temp }}\${{ env.ARTIFACT }}
-
-  upload-codecov:
-    runs-on: windows-latest
-    name: Build, Test, Upload Code Coverage Report
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
-        id: checkout_code
-
-      - name: Setup MSBuild and add to PATH
-        uses: microsoft/setup-msbuild@v1.0.2
-        id: setup_msbuild
-
-      - name: Run MSBuild
-        id: run_msbuild
-        run: msbuild /p:Configuration=Debug /p:Platform=x86 HelloCovDemo.sln
-
-      - name: Setup VSTest and add to PATH
-        uses: darenm/Setup-VSTest@v1
-        id: setup_vstest
-
-      - name: Setup OpenCppCoverage and add to PATH
-        id: setup_opencppcoverage
-        run: |
-          choco install OpenCppCoverage -y
-          echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
-
-      - name: Generate Report
-        id: generate_test_report
-        run: OpenCppCoverage.exe --sources HelloCov --export_type cobertura:HelloCov.xml -- "vstest.console.exe" Debug\HelloTest.dll
-
-      - name: Upload Report to Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          files: ./HelloCov.xml
-          fail_ci_if_error: true
-          functionalities: fix
