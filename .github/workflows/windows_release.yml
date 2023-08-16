@@ -77,6 +77,7 @@ jobs:
               copy C:\Windows\System32\msvcp140.dll .
               copy C:\Windows\System32\vcruntime140.dll .
               copy ${{ env.SOURCE_DIR }}\images\* .
+              robocopy "C:\Qt\6.5.1\mingw_64\plugins\platforms" platforms\* /E
       - name: (9) Zip build
         working-directory: ${{ runner.temp }}
         run:  |
