@@ -139,7 +139,7 @@ public class FinancialFormatter{
         for(int i = 0; i < out.length; i++){
             for(MP mp : mpList){
                 if(mp.interests.get(i).size() > 0){
-                    out[i] = (i+1) + ": " + mp.interests.get(i).get(0);
+                    out[i] = mp.interests.get(i).get(0).replace(",","");
                     break;
                 }
             }
