@@ -5,11 +5,24 @@
 #include <QPainter>
 #include <QVBoxLayout>
 #include <QPushButton>
+
+#include "mp.h"
+
 Card::Card(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Card)
 {
+   
     ui->setupUi(this);
+}
+
+Card::Card(MP mp) :
+    ui(new Ui::Card)
+{
+   
+    ui->setupUi(this);
+    ui->Name->setText(mp.getName());
+    ui->Party->setText(mp.getParty());
 }
 
 Card::~Card()

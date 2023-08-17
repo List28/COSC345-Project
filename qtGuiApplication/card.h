@@ -2,6 +2,7 @@
 #define CARD_H
 
 #include <QWidget>
+#include "mp.h"
 
 namespace Ui {
 class Card;
@@ -13,6 +14,7 @@ class Card : public QWidget
 
 public:
     explicit Card(QWidget *parent = nullptr);
+    Card(MP mp);
     ~Card();
 signals:
     void expandButtonClicked();
