@@ -71,7 +71,7 @@ bool DbManager::createMpsTable()
         QStringList fields = line.split(",");
 
         query.addBindValue(fields[0].toInt());
-        query.addBindValue((fields[1] + fields[2]).remove("\""));
+        query.addBindValue((fields[2].remove(" ") + " " + fields[1]).remove("\""));
         query.addBindValue(fields[3] == "\"\"" ? NULL : fields[3]);
         query.addBindValue(fields[4]);
         query.addBindValue(fields[5] == "\"\"" ? NULL : fields[5]);

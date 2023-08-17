@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
             qDebug() << "===" << mps[i].getElectorate();
         }
 
-        MP jamie = db.getMpFromName("Strange Jamie");
+        MP jamie = db.getMpFromName("Jamie Strange");
         qDebug() << "===" << jamie.getName();
 
         /*
