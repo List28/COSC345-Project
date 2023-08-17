@@ -9,6 +9,8 @@
 #include <QTextStream>
 #include <QStringList>
 
+#include "mp.h"
+
 DbManager::DbManager(const QString& path)
 {
     m_db = QSqlDatabase::addDatabase("QSQLITE");
@@ -40,7 +42,7 @@ bool DbManager::isOpen() const
 bool DbManager::createMpsTable()
 {
     QSqlQuery query;
-    query.prepare("CREATE TABLE mps( id INT PRIMARY KEY, name VARCHAR(50), salutation VARCHAR(10) NULL, job_title VARCHAR(50), electorate VARCHAR(50), party VARCHAR(30), parliament_email VARCHAR(70));");
+    query.prepare("CREATE TABLE mps( id INT, name VARCHAR(50) PRIMARY KEY, salutation VARCHAR(10) NULL, job_title VARCHAR(50), electorate VARCHAR(50) NULL, party VARCHAR(30), parliament_email VARCHAR(70));");
 
     if (!query.exec())
     {
@@ -69,10 +71,10 @@ bool DbManager::createMpsTable()
         QStringList fields = line.split(",");
 
         query.addBindValue(fields[0].toInt());
-        query.addBindValue(fields[1] + fields[2]);
-        query.addBindValue(fields[3]);
+        query.addBindValue((fields[1] + fields[2]).remove("\""));
+        query.addBindValue(fields[3] == "\"\"" ? NULL : fields[3]);
         query.addBindValue(fields[4]);
-        query.addBindValue(fields[5]);
+        query.addBindValue(fields[5] == "\"\"" ? NULL : fields[5]);
         query.addBindValue(fields[6]);
         query.addBindValue(fields[7]);
 
@@ -86,108 +88,41 @@ bool DbManager::createMpsTable()
     return true;
 }
 
-/*
-bool DbManager::addMp(const QString& name)
+std::vector<MP> DbManager::getAllMps()
 {
-    bool success = false;
-
-    if (!name.isEmpty())
-    {
-        QSqlQuery queryAdd;
-        queryAdd.prepare("INSERT INTO people (name) VALUES (:name)");
-        queryAdd.bindValue(":name", name);
-
-        if (queryAdd.exec())
-        {
-            success = true;
-        }
-        else
-        {
-            qDebug() << "add person failed: " << queryAdd.lastError();
-        }
-    }
-    else
-    {
-        qDebug() << "add person failed: name cannot be empty";
-    }
-
-    return success;
-}
-*/
-bool DbManager::removePerson(const QString& name)
-{
-    bool success = false;
-
-    if (personExists(name))
-    {
-        QSqlQuery queryDelete;
-        queryDelete.prepare("DELETE FROM people WHERE name = (:name)");
-        queryDelete.bindValue(":name", name);
-        success = queryDelete.exec();
-
-        if (!success)
-        {
-            qDebug() << "remove person failed: " << queryDelete.lastError();
-        }
-    }
-    else
-    {
-        qDebug() << "remove person failed: person doesnt exist";
-    }
-
-    return success;
-}
-
-void DbManager::printAllMps() const
-{
+    std::vector<MP> allMps;
     qDebug() << "Persons in db:";
     QSqlQuery query("SELECT * FROM mps");
     int idName = query.record().indexOf("name");
     while (query.next())
     {
-        QString name = query.value(idName).toString();
-        qDebug() << "===" << name;
+        MP mp = MP(query.value(0).toInt(), query.value(1).toString(), query.value(2).toString(),
+            query.value(3).toString(), query.value(4).toString(), query.value(5).toString(), 
+            query.value(6).toString());
+        allMps.push_back(mp);
     }
+    return allMps;
 }
 
-bool DbManager::personExists(const QString& name) const
+
+MP DbManager::getMpFromName(const QString& name)
 {
-    bool exists = false;
+    QSqlQuery query;
+    query.prepare("SELECT * FROM mps WHERE name = ?");
+    query.bindValue(0, name);
 
-    QSqlQuery checkQuery;
-    checkQuery.prepare("SELECT name FROM people WHERE name = (:name)");
-    checkQuery.bindValue(":name", name);
-
-    if (checkQuery.exec())
+    if (query.exec() && query.next())
     {
-        if (checkQuery.next())
-        {
-            exists = true;
-        }
+        MP mp = MP(query.value(0).toInt(), query.value(1).toString(), query.value(2).toString(),
+                query.value(3).toString(), query.value(4).toString(), query.value(5).toString(),
+                query.value(6).toString());
+        return mp;
+        
     }
     else
     {
-        qDebug() << "person exists failed: " << checkQuery.lastError();
+        qDebug() << "person exists failed: " << query.lastError();
+        return MP();
     }
-
-    return exists;
 }
 
-bool DbManager::removeAllPersons()
-{
-    bool success = false;
-
-    QSqlQuery removeQuery;
-    removeQuery.prepare("DELETE FROM people");
-
-    if (removeQuery.exec())
-    {
-        success = true;
-    }
-    else
-    {
-        qDebug() << "remove all persons failed: " << removeQuery.lastError();
-    }
-
-    return success;
-}

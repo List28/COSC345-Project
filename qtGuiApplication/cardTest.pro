@@ -23,14 +23,16 @@ SOURCES += \
     dialog.cpp \
     expandedcard.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    mp.cpp
 
 HEADERS += \
     card.h \
     dbmanager.h \
     dialog.h \
     expandedcard.h \
-    mainwindow.h
+    mainwindow.h \
+    mp.h
 
 FORMS += \
     card.ui \

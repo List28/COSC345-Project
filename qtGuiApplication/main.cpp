@@ -4,8 +4,8 @@
 #include <QDebug>
 #include <dbmanager.h>
 
-// Change to any path you wish
-static const QString path = "example.db";
+
+static const QString path = "parliament.db";
 
 int main(int argc, char* argv[])
 {
@@ -18,7 +18,15 @@ int main(int argc, char* argv[])
     if (db.isOpen())
     {
         db.createMpsTable();
-        db.printAllMps();
+        std::vector<MP> mps = db.getAllMps();
+        for (size_t i = 0; i < mps.size(); ++i) {
+            qDebug() << "===" << mps[i].getName();
+            qDebug() << "===" << mps[i].getElectorate();
+        }
+
+        MP jamie = db.getMpFromName("Strange Jamie");
+        qDebug() << "===" << jamie.getName();
+
         /*
         db.createTable();   // Creates a table if it doens't exist. Otherwise, it will use existing table.
         db.addPerson("A");
