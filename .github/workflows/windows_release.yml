@@ -81,9 +81,9 @@ jobs:
               copy C:\Windows\System32\vcruntime140.dll .
               
       - name: (9) Generate Doxygen Documentation
-        uses: docker://mattnotmitt/doxygen-action:1.9.5
-        with:
-          command: doxygen doxygen
+         run:|
+          cd ${{ env.SOURCE_DIR }}/doxygen
+          doxygen Doxyfile
      
       - name: (10) Zip build
         working-directory: ${{ runner.temp }}
