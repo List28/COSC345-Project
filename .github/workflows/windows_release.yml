@@ -84,7 +84,6 @@ jobs:
         uses: docker://mattnotmitt/doxygen-action:1.9.5
         with:
           command: doxygen ${{ env.SOURCE_DIR }}/doxygen
-        container: ubuntu-latest
      
       - name: (10) Zip build
         working-directory: ${{ runner.temp }}
