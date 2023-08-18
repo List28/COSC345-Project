@@ -60,14 +60,14 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="Name">
           <property name="text">
            <string>Michael Woodhouse</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="Party">
           <property name="text">
            <string>Labour</string>
           </property>

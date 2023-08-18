@@ -5,6 +5,7 @@
 #include "expandedcard.h"
 #include <QDebug>
 #include <QBoxLayout>
+#include <dbmanager.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -57,14 +58,23 @@ void MainWindow::handleOkButtonClicked()
 
 void MainWindow::on_peopleButton_clicked()
 {
+    static const QString path = "parliament.db";
+    DbManager db(path);
+    std::vector<MP> mps;
+
+    if (db.isOpen())
+    {
+        mps = db.getAllMps();
+    }
+
     clearCardsLayout();
 
     int maxColumns = 3; // Maximum number of cards per row
     int currentColumn = 0;
     int currentRow = 0;
 
-    for (int var = 0; var < 30; ++var) {
-        Card *card = new Card;
+    for (size_t i = 0; i < mps.size(); ++i) {
+        Card* card = new Card(mps[i]);
         ui->CardsLayout->addWidget(card, currentRow, currentColumn);
 
         // Update column and row positions
