@@ -28,8 +28,8 @@ public:
     QLabel *label;
     QFrame *frame;
     QVBoxLayout *verticalLayout_2;
-    QLabel *label_2;
-    QLabel *label_3;
+    QLabel *Name;
+    QLabel *Party;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *expandButton;
 
@@ -63,15 +63,15 @@ public:
         frame->setFrameShadow(QFrame::Raised);
         verticalLayout_2 = new QVBoxLayout(frame);
         verticalLayout_2->setObjectName("verticalLayout_2");
-        label_2 = new QLabel(frame);
-        label_2->setObjectName("label_2");
+        Name = new QLabel(frame);
+        Name->setObjectName("Name");
 
-        verticalLayout_2->addWidget(label_2);
+        verticalLayout_2->addWidget(Name);
 
-        label_3 = new QLabel(frame);
-        label_3->setObjectName("label_3");
+        Party = new QLabel(frame);
+        Party->setObjectName("Party");
 
-        verticalLayout_2->addWidget(label_3);
+        verticalLayout_2->addWidget(Party);
 
 
         horizontalLayout->addWidget(frame);
@@ -105,8 +105,8 @@ public:
     {
         Card->setWindowTitle(QCoreApplication::translate("Card", "Form", nullptr));
         label->setText(QString());
-        label_2->setText(QCoreApplication::translate("Card", "Michael Woodhouse", nullptr));
-        label_3->setText(QCoreApplication::translate("Card", "Labour", nullptr));
+        Name->setText(QCoreApplication::translate("Card", "Michael Woodhouse", nullptr));
+        Party->setText(QCoreApplication::translate("Card", "Labour", nullptr));
         expandButton->setText(QCoreApplication::translate("Card", "Expand", nullptr));
     } // retranslateUi
 

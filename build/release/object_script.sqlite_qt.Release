@@ -1,0 +1,12 @@
+release/card.o
+release/dbmanager.o
+release/dialog.o
+release/expandedcard.o
+release/main.o
+release/mainwindow.o
+release/mp.o
+release/qrc_icons.o
+release/moc_card.o
+release/moc_dialog.o
+release/moc_expandedcard.o
+release/moc_mainwindow.o
