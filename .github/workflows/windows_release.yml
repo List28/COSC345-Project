@@ -92,23 +92,23 @@ jobs:
           name: ${{ env.ARTIFACT }}
           path: ${{ runner.temp }}\${{ env.ARTIFACT }}
 
-  # run_app:
-  #   runs-on: windows-2019
-  #   needs: build
-  #   steps:
-  #     - name: (1) Checkout repo
-  #       uses: actions/checkout@v2
-  #       with:
-  #         submodules: recursive
+  run_app:
+    runs-on: windows-2019
+    needs: build
+    steps:
+      - name: (1) Checkout repo
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
-  #     - name: (2) Get artifact
-  #       uses: actions/download-artifact@master
-  #       with:
-  #         name: ${{ env.ARTIFACT }}
+      - name: (2) Get artifact
+        uses: actions/download-artifact@master
+        with:
+          name: ${{ env.ARTIFACT }}
 
-  #     - name: (3) Unzip artifact
-  #       run: 7z x ${{ env.ARTIFACT }} -o${{ runner.temp }}/build
+      - name: (3) Unzip artifact
+        run: 7z x ${{ env.ARTIFACT }} -o${{ runner.temp }}/build
 
-  #     - name: (4) Run Application
-  #       working-directory: ${{ runner.temp }}/build/release/
-  #       run: .\cardTest.exe
+      - name: (4) Run Application
+        working-directory: ${{ runner.temp }}/build/release/
+        run: .\sqlite_qt.exe
