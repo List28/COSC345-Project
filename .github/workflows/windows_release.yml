@@ -112,3 +112,25 @@ jobs:
       - name: (4) Run Application
         working-directory: ${{ runner.temp }}/build/release/
         run: .\sqlite_qt.exe
+
+      # - name: (5) Setup OpenCppCoverage and add to Path
+      #   id: setup_opencppcoverage
+      #   run: |
+      #     choco install OpenCppCoverage -y
+      #     echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
+
+      # - name: (6) Generate Report
+      #   id: generate_test_report
+      #   shell: cmd
+      #   run: |
+      #     cd ${{ runner.temp }}/build/release
+      #     OpenCppCoverage.exe --export_type cobertura:qt_application.xml -- sqlite_qt.exe
+        
+      # - name: (7) Upload Report to Codecov
+      #   uses: codecov/codecov-action@v2
+      #   env:
+      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      #   with:
+      #     files: ./qt_application.xml
+      #     fail_ci_if_error: true
+      #     functionalities: fix
