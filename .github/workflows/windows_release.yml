@@ -71,7 +71,7 @@ jobs:
     command: doxygen ${{ env.SOURCE_DIR }}/doxygen
 
 
-      - name: (8) Build
+      - name: (9) Build
         working-directory: ${{ runner.temp }}\build
         run:  |
               qmake -r ${{ env.SOURCE_DIR }}\qtGuiApplication\cardTest.pro
@@ -86,7 +86,7 @@ jobs:
               copy C:\Windows\System32\vcruntime140.dll .
               
               
-      - name: (9) Zip build
+      - name: (10) Zip build
         working-directory: ${{ runner.temp }}
         run:  |
               7z a qt-mpGui-build.zip ${{ runner.temp }}\build\* -r
