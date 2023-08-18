@@ -65,13 +65,7 @@ jobs:
         with:
           arch: x64
 
-      - name: (8) Generate Doxygen Documentation
-        uses: mattnotmitt/doxygen-action@1.9.5
-        with:
-    command: doxygen ${{ env.SOURCE_DIR }}/doxygen
-
-
-      - name: (9) Build
+      - name: (8) Build
         working-directory: ${{ runner.temp }}\build
         run:  |
               qmake -r ${{ env.SOURCE_DIR }}\qtGuiApplication\cardTest.pro
@@ -85,13 +79,18 @@ jobs:
               copy C:\Windows\System32\msvcp140.dll .
               copy C:\Windows\System32\vcruntime140.dll .
               
+      - name: (9) Generate Doxygen Documentation
+        uses: mattnotmitt/doxygen-action@1.9.5
+        with:
+          command: doxygen ${{ env.SOURCE_DIR }}/doxygen
+        shell: bash
               
       - name: (10) Zip build
         working-directory: ${{ runner.temp }}
         run:  |
               7z a qt-mpGui-build.zip ${{ runner.temp }}\build\* -r
               
-      - name: (10) Save build artifact
+      - name: (11) Save build artifact
         uses: actions/upload-artifact@master
         with:
           name: ${{ env.ARTIFACT }}
