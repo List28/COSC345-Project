@@ -110,5 +110,6 @@ jobs:
 
       - name: (4) Run Application
         working-directory: ${{ runner.temp }}/build/release/
-        run: cardTest.exe
+        run: .\cardTest.exe
+
 
