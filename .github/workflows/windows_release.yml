@@ -106,7 +106,8 @@ jobs:
           name: ${{ env.ARTIFACT }}
 
       - name: (3) Unzip artifact
-        run: 7z x ${{ env.ARTIFACT }}
+        run: 7z x ${{ env.ARTIFACT }} -o${{ runner.temp }}/build
+
 
       - name: (4) Run Application
         run: ${{ runner.temp }}/build/release/cardTest.exe
