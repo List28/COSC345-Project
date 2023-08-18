@@ -72,7 +72,7 @@ jobs:
               ${{ runner.temp }}\jom\jom -j2
               mkdir images
               copy ${{ env.SOURCE_DIR }}\images\* images
-              copy ${{ env.SOURCE_DIR }} parliament.db .
+              copy ${{ env.SOURCE_DIR }}\build parliament.db .
               cd release
               windeployqt --qmldir ${{ env.SOURCE_DIR }}\build\release sqlite_qt.exe --pdb --release --compiler-runtime
               copy C:\Windows\System32\concrt140.dll . 
