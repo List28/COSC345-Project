@@ -80,10 +80,10 @@ jobs:
               copy C:\Windows\System32\vcruntime140.dll .
 
               
-      - name: run
+      - name: Run Application
         working-directory: ${{ runner.temp }}\build\release
-        run:  |
-              ./cardTest.exe
+        run: ${{ runner.temp }}\build\release\cardTest.exe
+
                        
       - name: (9) Zip build
         working-directory: ${{ runner.temp }}
