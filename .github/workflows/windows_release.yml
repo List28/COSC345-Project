@@ -65,6 +65,11 @@ jobs:
         with:
           arch: x64
 
+      - name: (8) Generate Doxygen Documentation
+        run: doxygen
+        shell: bash
+
+
       - name: (8) Build
         working-directory: ${{ runner.temp }}\build
         run:  |
