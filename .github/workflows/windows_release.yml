@@ -66,8 +66,9 @@ jobs:
           arch: x64
 
       - name: (8) Generate Doxygen Documentation
-        run: doxygen
-        shell: bash
+        uses: mattnotmitt/doxygen-action@1.9.5
+        with:
+    command: doxygen ${{ env.SOURCE_DIR }}/doxygen
 
 
       - name: (8) Build
