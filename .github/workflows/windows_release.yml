@@ -83,7 +83,7 @@ jobs:
         uses: mattnotmitt/doxygen-action@1.9.5
         with:
           command: doxygen ${{ env.SOURCE_DIR }}/doxygen
-        shell: bash
+     
               
       - name: (10) Zip build
         working-directory: ${{ runner.temp }}
