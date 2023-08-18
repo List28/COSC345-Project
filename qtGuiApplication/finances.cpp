@@ -1,12 +1,15 @@
+#include <QStringList>
 #include "finances.h"
 
-Finances::Finances(const QString mp_name, std::vector<QString>& company_directorships, 
-    std::vector<QString>& other_companies, std::vector<QString>& employment,
-    std::vector<QString>& interest_trust, std::vector<QString>& organizations,
-    std::vector<QString>& property, std::vector<QString>& retirement, 
-    std::vector<QString>&  investment_schemes, std::vector<QString>& debts_to_you,
-    std::vector<QString>& debts_owed_by_you, std::vector<QString>& overseas_travel,
-    std::vector<QString>& gifts, std::vector<QString>& payment_activities) :
+Finances::Finances()
+{
+}
+
+Finances::Finances(const QString mp_name, const QStringList company_directorships, 
+    const QStringList other_companies, const QStringList employment, const QStringList interest_trust, 
+    const QStringList organizations, const QStringList property, const QStringList retirement,  
+    const QStringList investment_schemes, const QStringList debts_to_you, const QStringList debts_owed_by_you, 
+    const QStringList overseas_travel, const QStringList gifts, const QStringList payment_activities) :
     mp_name(mp_name), company_directorships(company_directorships), other_companies(other_companies),
     employment(employment), interest_trust(interest_trust), organizations(organizations), 
     property(property), retirement(retirement), investment_schemes(investment_schemes), 
@@ -20,67 +23,67 @@ QString Finances::getMpName() const
     return mp_name;
 }
 
-std::vector<QString>& Finances::getCompanyDirectorships()
+QStringList Finances::getCompanyDirectorships() const
 {
     return company_directorships;
 }
 
-std::vector<QString>& Finances::getOtherCompanies()
+QStringList Finances::getOtherCompanies()
 {
     return other_companies;
 }
 
-std::vector<QString>& Finances::getEmployment()
+QStringList Finances::getEmployment()
 {
     return employment;
 }
 
-std::vector<QString>& Finances::getInterestTrust()
+QStringList Finances::getInterestTrust()
 {
     return interest_trust;
 }
 
-std::vector<QString>& Finances::getOrganizations()
+QStringList Finances::getOrganizations()
 {
     return organizations;
 }
 
-std::vector<QString>& Finances::getProperty()
+QStringList Finances::getProperty()
 {
     return property;
 }
 
-std::vector<QString>& Finances::getRetirement()
+QStringList Finances::getRetirement()
 {
     return retirement;
 }
 
-std::vector<QString>& Finances::getInvestmentSchemes()
+QStringList Finances::getInvestmentSchemes()
 {
     return investment_schemes;
 }
 
-std::vector<QString>& Finances::getDebtsToYou()
+QStringList Finances::getDebtsToYou()
 {
     return debts_to_you;
 }
 
-std::vector<QString>& Finances::getDebtsOwedByYou()
+QStringList Finances::getDebtsOwedByYou()
 {
     return debts_owed_by_you;
 }
 
-std::vector<QString>& Finances::getOverseasTravel()
+QStringList Finances::getOverseasTravel()
 {
     return overseas_travel;
 }
 
-std::vector<QString>& Finances::getGifts()
+QStringList Finances::getGifts()
 {
     return gifts;
 }
 
-std::vector<QString>& Finances::getPaymentActivities()
+QStringList Finances::getPaymentActivities()
 {
     return payment_activities;
 }
