@@ -8,10 +8,10 @@ on:
 
 jobs:
   build: 
-  runs-on: ubuntu-latest 
-  steps: 
-    - uses: mattnotmitt/doxygen-action@v1.9.5
-      doxyfile-path: './dconfig'
+    runs-on: ubuntu-latest 
+    steps: 
+      - uses: mattnotmitt/doxygen-action@v1.9.5
+        doxyfile-path: './dconfig'
 
   deploy:
     runs-on: ubuntu-latest
