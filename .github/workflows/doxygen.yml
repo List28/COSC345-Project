@@ -16,6 +16,6 @@ jobs:
       #   run: mkdir docs
       - uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
         with:
-          branch: gh_pages
+          branch: gh-pages
           folder: docs
           config_file: dconfig
