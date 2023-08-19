@@ -19,6 +19,6 @@ jobs:
       - uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
         with:
           github_token: ${{ secrets.DOX_SECRET }}
-          branch: main
+          branch: gh_pages
           folder: docs
           config_file: dconfig
