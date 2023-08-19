@@ -10,9 +10,10 @@ jobs:
   build: 
     runs-on: ubuntu-latest 
     steps: 
-      - run:| 
-         pwd
-         ls
+      - name: path
+        run: pwd
+      - name: what-do-we-have-here
+        run: ls
       - uses: mattnotmitt/doxygen-action@v1.9.5
         with:
           doxyfile-path: 'dconfig'
