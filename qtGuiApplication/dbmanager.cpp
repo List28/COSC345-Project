@@ -137,17 +137,17 @@ std::vector<Finances> DbManager::getAllFinances()
     {
         QStringList cd = query.value(1).toString().split("|");
         QStringList oc = query.value(2).toString().split("|");
-        QStringList emp = query.value(1).toString().split("|");
-        QStringList it = query.value(1).toString().split("|");
-        QStringList orgs = query.value(1).toString().split("|");
-        QStringList prop = query.value(1).toString().split("|");
-        QStringList ret = query.value(1).toString().split("|");
-        QStringList is = query.value(1).toString().split("|");
-        QStringList to_you = query.value(1).toString().split("|");
-        QStringList by_you = query.value(1).toString().split("|");
-        QStringList os = query.value(1).toString().split("|");
-        QStringList gifts = query.value(1).toString().split("|");
-        QStringList pa = query.value(1).toString().split("|");
+        QStringList emp = query.value(3).toString().split("|");
+        QStringList it = query.value(4).toString().split("|");
+        QStringList orgs = query.value(5).toString().split("|");
+        QStringList prop = query.value(6).toString().split("|");
+        QStringList ret = query.value(7).toString().split("|");
+        QStringList is = query.value(8).toString().split("|");
+        QStringList to_you = query.value(9).toString().split("|");
+        QStringList by_you = query.value(10).toString().split("|");
+        QStringList os = query.value(11).toString().split("|");
+        QStringList gifts = query.value(12).toString().split("|");
+        QStringList pa = query.value(13).toString().split("|");
 
         Finances finances = Finances(query.value(0).toString(), cd, oc, emp, it, orgs, prop, ret, is, to_you, by_you,
             os, gifts, pa);
