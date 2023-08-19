@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: make docs
-        run: mkdir -p docs/html
+        run: mkdir docs
       - uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: docs/html
+          branch: main
+          folder: docs
           config_file: dconfig
