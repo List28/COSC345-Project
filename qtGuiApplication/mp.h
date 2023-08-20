@@ -2,6 +2,7 @@
 #define MP_H
 
 #include <QString>
+#include "finances.h"
 
 class MP
 {
@@ -9,7 +10,7 @@ public:
     MP();
     MP(int id, const QString &name, const QString &salutation,
        const QString &job_title, const QString &electorate,
-       const QString &party, const QString &parliament_email);
+       const QString &party, const QString &parliament_email, const Finances finances);
 
     int getId() const;
     QString getName() const;
@@ -18,6 +19,7 @@ public:
     QString getElectorate() const;
     QString getParty() const;
     QString getParliamentEmail() const;
+    Finances getFinances() const;
 
 private:
     int id;
@@ -27,6 +29,7 @@ private:
     QString electorate;
     QString party;
     QString parliament_email;
+    Finances finances;
 };
 
 #endif // MP_H
