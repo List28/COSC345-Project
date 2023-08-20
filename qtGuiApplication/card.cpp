@@ -23,6 +23,8 @@ Card::Card(MP mp) :
     ui->setupUi(this);
     ui->Name->setText(mp.getName());
     ui->Party->setText(mp.getParty());
+
+    ui->Portrait->setPixmap(QPixmap("../images/portraits/" + mp.getName() + ".jpg"));
 }
 
 Card::~Card()
