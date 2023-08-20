@@ -2,6 +2,7 @@
 #define EXPANDEDCARD_H
 
 #include <QDialog>
+#include "mp.h"
 
 namespace Ui {
 class ExpandedCard;
@@ -13,9 +14,11 @@ class ExpandedCard : public QDialog
 
 public:
     explicit ExpandedCard(QWidget *parent = nullptr);
+    explicit ExpandedCard(MP mp);
     ~ExpandedCard();
 private:
     Ui::ExpandedCard *ui;
+    MP mp;
 signals:
     void okButtonClicked(); // Add the signal for the "OK" button
 

@@ -19,7 +19,8 @@ Card::Card(QWidget *parent) :
 Card::Card(MP mp) :
     ui(new Ui::Card)
 {
-   
+    this->mp = mp;
+
     ui->setupUi(this);
     ui->Name->setText(mp.getName());
     ui->Party->setText(mp.getParty());
@@ -43,5 +44,5 @@ void Card::paintEvent(QPaintEvent *event)
 
 void Card::on_expandButton_clicked()
 {
-    emit expandButtonClicked();
+    emit expandButtonClicked(mp);
 }

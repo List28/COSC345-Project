@@ -17,11 +17,12 @@ public:
     Card(MP mp);
     ~Card();
 signals:
-    void expandButtonClicked();
+    void expandButtonClicked(MP mp);
 private slots:
     void on_expandButton_clicked();
 private:
     Ui::Card *ui;
+    MP mp;
 
     // QWidget interface
 protected:

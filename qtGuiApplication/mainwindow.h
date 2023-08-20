@@ -27,7 +27,7 @@ private:
     QMap<Card*, ExpandedCard*> expandedCardsMap;
 
 private slots:
-    void handleExpandButtonClicked();
+    void handleExpandButtonClicked(MP mp);
     void handleOkButtonClicked();
     void on_peopleButton_clicked();
     void on_partiesButton_clicked();
