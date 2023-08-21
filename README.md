@@ -16,8 +16,8 @@
 -   Extract the downloaded zip file twice. Navigate to the `release` folder inside the newly extracted folder using the terminal
 -   Run the command `./cardTest.exe`
 
-##Doxygen
-[lable]https://debug-divas.github.io/COSC345-Project/
+## Doxygen
+https://debug-divas.github.io/COSC345-Project/
 
 ## Github Actions
 ![Build](https://github.com/Debug-Divas/COSC345-Project/actions/workflows/windows_release.yml/badge.svg)
