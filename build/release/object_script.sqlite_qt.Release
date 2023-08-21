@@ -5,6 +5,7 @@ release/expandedcard.o
 release/main.o
 release/mainwindow.o
 release/mp.o
+release/finances.o
 release/qrc_icons.o
 release/moc_card.o
 release/moc_dialog.o
