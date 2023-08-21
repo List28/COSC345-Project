@@ -72,13 +72,20 @@ jobs:
               ${{ runner.temp }}\jom\jom -j2
               mkdir images
               copy ${{ env.SOURCE_DIR }}\images\* images
-              copy parliament.db ${{ runner.temp }}\qtGuiApplication\debug
+              cd images 
+              mkdir parties
+              mkdir portraits
+              copy ${{ env.SOURCE_DIR }}\images\parties\* parties
+              copy ${{ env.SOURCE_DIR }}\images\portraits\* portraits
+              cd ..
+              
               cd release
               windeployqt --qmldir ${{ env.SOURCE_DIR }}\build\release sqlite_qt.exe --pdb --release --compiler-runtime
               copy C:\Windows\System32\concrt140.dll . 
               copy C:\Windows\System32\vccorlib140.dll .
               copy C:\Windows\System32\msvcp140.dll .
               copy C:\Windows\System32\vcruntime140.dll .
+              copy parliament.db ${{ runner.temp }} release
               
               
       - name: (9) Zip build
