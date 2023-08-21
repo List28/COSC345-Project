@@ -14,7 +14,7 @@
 -   On the left side-bar click on Windows Release then click on the latest passed workflow run
 -   In the Artifacts section click on the zip file to download
 -   Extract the downloaded zip file twice. Navigate to the `release` folder inside the newly extracted folder using the terminal
--   Run the command `./cardTest.exe`
+-   Run the command `./sqlite_qt.exe`
 
 ## Doxygen
 https://debug-divas.github.io/COSC345-Project/
