@@ -17,7 +17,7 @@
 -   Run the command `./sqlite_qt.exe`
 
 ## Doxygen
-[![Documentation][doxygen-shield]][https://debug-divas.github.io/COSC345-Project/]
+![doxygen-shield]][https://debug-divas.github.io/COSC345-Project/]
 
 
 ## Github Actions
