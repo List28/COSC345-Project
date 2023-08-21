@@ -90,7 +90,10 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: ${{ env.ARTIFACT }}
-          path: ${{ runner.temp }}\${{ env.ARTIFACT }}
+          path: |
+            ${{ runner.temp }}\${{ env.ARTIFACT }}
+            ${{ env.SOURCE_DIR }}/qtGuiApplication/main.cpp
+            ${{ env.SOURCE_DIR }}/qtGuiApplication/mp.cpp
 
   # run_app:
   #   runs-on: windows-2019
