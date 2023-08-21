@@ -20,5 +20,5 @@
 ## Github Actions
 ![Build](https://github.com/Debug-Divas/COSC345-Project/actions/workflows/windows_release.yml/badge.svg)
 
-
+## Codacy Integration
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/1d03bbe8a8cf4618b91768661abe8e03)](https://app.codacy.com/gh/Debug-Divas/COSC345-Project/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
