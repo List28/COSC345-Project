@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'expandedcard.ui'
 **
-** Created by: Qt User Interface Compiler version 6.5.1
+** Created by: Qt User Interface Compiler version 6.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -31,8 +31,8 @@ public:
     QGridLayout *gridLayout;
     QWidget *widget;
     QVBoxLayout *verticalLayout;
-    QLabel *label_2;
-    QLabel *label_4;
+    QLabel *Name;
+    QLabel *Party;
     QDialogButtonBox *okButton;
     QFrame *frame;
     QHBoxLayout *horizontalLayout;
@@ -40,7 +40,7 @@ public:
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
     QPushButton *pushButton_4;
-    QLabel *label;
+    QLabel *Portrait;
     QWidget *widget_2;
     QVBoxLayout *expandedLayoutWindow;
     QSpacerItem *verticalSpacer;
@@ -58,17 +58,17 @@ public:
         widget->setObjectName("widget");
         verticalLayout = new QVBoxLayout(widget);
         verticalLayout->setObjectName("verticalLayout");
-        label_2 = new QLabel(widget);
-        label_2->setObjectName("label_2");
-        label_2->setMaximumSize(QSize(100, 30));
+        Name = new QLabel(widget);
+        Name->setObjectName("Name");
+        Name->setMaximumSize(QSize(100, 30));
 
-        verticalLayout->addWidget(label_2);
+        verticalLayout->addWidget(Name);
 
-        label_4 = new QLabel(widget);
-        label_4->setObjectName("label_4");
-        label_4->setMaximumSize(QSize(170, 30));
+        Party = new QLabel(widget);
+        Party->setObjectName("Party");
+        Party->setMaximumSize(QSize(170, 30));
 
-        verticalLayout->addWidget(label_4);
+        verticalLayout->addWidget(Party);
 
 
         gridLayout->addWidget(widget, 0, 1, 1, 1);
@@ -111,15 +111,15 @@ public:
 
         gridLayout->addWidget(frame, 6, 0, 1, 3);
 
-        label = new QLabel(ExpandedCard);
-        label->setObjectName("label");
-        label->setMaximumSize(QSize(100, 100));
-        label->setFrameShape(QFrame::NoFrame);
-        label->setFrameShadow(QFrame::Plain);
-        label->setPixmap(QPixmap(QString::fromUtf8("../images/wood-michael-TEST.jpg")));
-        label->setScaledContents(true);
+        Portrait = new QLabel(ExpandedCard);
+        Portrait->setObjectName("Portrait");
+        Portrait->setMaximumSize(QSize(100, 100));
+        Portrait->setFrameShape(QFrame::NoFrame);
+        Portrait->setFrameShadow(QFrame::Plain);
+        Portrait->setPixmap(QPixmap(QString::fromUtf8("../images/wood-michael-TEST.jpg")));
+        Portrait->setScaledContents(true);
 
-        gridLayout->addWidget(label, 0, 0, 1, 1);
+        gridLayout->addWidget(Portrait, 0, 0, 1, 1);
 
         widget_2 = new QWidget(ExpandedCard);
         widget_2->setObjectName("widget_2");
@@ -152,13 +152,13 @@ public:
     void retranslateUi(QDialog *ExpandedCard)
     {
         ExpandedCard->setWindowTitle(QCoreApplication::translate("ExpandedCard", "Dialog", nullptr));
-        label_2->setText(QCoreApplication::translate("ExpandedCard", "<html><head/><body><p><span style=\" font-weight:700;\">Michael wood</span></p></body></html>", nullptr));
-        label_4->setText(QCoreApplication::translate("ExpandedCard", "<html><head/><body><p><span style=\" font-weight:700;\">Labour MP for Mt Roskill</span></p></body></html>", nullptr));
+        Name->setText(QCoreApplication::translate("ExpandedCard", "<html><head/><body><p><span style=\" font-weight:700;\">Michael wood</span></p></body></html>", nullptr));
+        Party->setText(QCoreApplication::translate("ExpandedCard", "<html><head/><body><p><span style=\" font-weight:700;\">Labour MP for Mt Roskill</span></p></body></html>", nullptr));
         pushButton->setText(QCoreApplication::translate("ExpandedCard", "Overview", nullptr));
         pushButton_2->setText(QCoreApplication::translate("ExpandedCard", "Details", nullptr));
         pushButton_3->setText(QCoreApplication::translate("ExpandedCard", "Interests", nullptr));
         pushButton_4->setText(QCoreApplication::translate("ExpandedCard", "Expenses", nullptr));
-        label->setText(QString());
+        Portrait->setText(QString());
         label_5->setText(QCoreApplication::translate("ExpandedCard", "Transcript:", nullptr));
         label_3->setText(QCoreApplication::translate("ExpandedCard", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit a"
                         "met, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nul pariatur.", nullptr));

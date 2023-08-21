@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'card.ui'
 **
-** Created by: Qt User Interface Compiler version 6.5.1
+** Created by: Qt User Interface Compiler version 6.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -25,7 +25,7 @@ class Ui_Card
 public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
-    QLabel *label;
+    QLabel *Portrait;
     QFrame *frame;
     QVBoxLayout *verticalLayout_2;
     QLabel *Name;
@@ -48,14 +48,14 @@ public:
         verticalLayout->setObjectName("verticalLayout");
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
-        label = new QLabel(Card);
-        label->setObjectName("label");
-        label->setMaximumSize(QSize(64, 64));
-        label->setFrameShadow(QFrame::Plain);
-        label->setPixmap(QPixmap(QString::fromUtf8("../images/wood-michael-TEST.jpg")));
-        label->setScaledContents(true);
+        Portrait = new QLabel(Card);
+        Portrait->setObjectName("Portrait");
+        Portrait->setMaximumSize(QSize(64, 64));
+        Portrait->setFrameShadow(QFrame::Plain);
+        Portrait->setPixmap(QPixmap(QString::fromUtf8("../images/wood-michael-TEST.jpg")));
+        Portrait->setScaledContents(true);
 
-        horizontalLayout->addWidget(label);
+        horizontalLayout->addWidget(Portrait);
 
         frame = new QFrame(Card);
         frame->setObjectName("frame");
@@ -104,7 +104,7 @@ public:
     void retranslateUi(QWidget *Card)
     {
         Card->setWindowTitle(QCoreApplication::translate("Card", "Form", nullptr));
-        label->setText(QString());
+        Portrait->setText(QString());
         Name->setText(QCoreApplication::translate("Card", "Michael Woodhouse", nullptr));
         Party->setText(QCoreApplication::translate("Card", "Labour", nullptr));
         expandButton->setText(QCoreApplication::translate("Card", "Expand", nullptr));
