@@ -4,6 +4,7 @@
 #include <QSqlDatabase>
 
 #include "mp.h"
+#include "finances.h"
 
 class DbManager
 {
@@ -21,6 +22,8 @@ public:
     std::vector<MP> getAllMps();
 
     MP getMpFromName(const QString& name);
+    
+    std::vector<Finances> getAllFinances();
 
 private:
     QSqlDatabase m_db;

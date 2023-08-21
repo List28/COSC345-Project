@@ -29,7 +29,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0">
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="Portrait">
        <property name="maximumSize">
         <size>
          <width>64</width>

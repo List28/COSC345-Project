@@ -24,7 +24,8 @@ SOURCES += \
     expandedcard.cpp \
     main.cpp \
     mainwindow.cpp \
-    mp.cpp
+    mp.cpp \
+    finances.cpp
 
 HEADERS += \
     card.h \
@@ -32,7 +33,8 @@ HEADERS += \
     dialog.h \
     expandedcard.h \
     mainwindow.h \
-    mp.h
+    mp.h \
+    finances.h
 
 FORMS += \
     card.ui \

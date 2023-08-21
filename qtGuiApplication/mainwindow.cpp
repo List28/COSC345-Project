@@ -22,7 +22,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::handleExpandButtonClicked()
+void MainWindow::handleExpandButtonClicked(MP mp)
 {
     Card *senderCard = qobject_cast<Card*>(sender());
     if (senderCard) {
@@ -30,7 +30,7 @@ void MainWindow::handleExpandButtonClicked()
             delete expandedCard;
         }
 
-        expandedCard = new ExpandedCard;
+        expandedCard = new ExpandedCard(mp);
         connect(expandedCard, &ExpandedCard::okButtonClicked, this, &MainWindow::handleOkButtonClicked);
         ui->CardsLayout->addWidget(expandedCard);
         senderCard->hide();

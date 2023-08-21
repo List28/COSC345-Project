@@ -18,7 +18,7 @@
     <widget class="QWidget" name="widget" native="true">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="Name">
         <property name="maximumSize">
          <size>
           <width>100</width>
@@ -31,7 +31,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="Party">
         <property name="maximumSize">
          <size>
           <width>170</width>
@@ -109,7 +109,7 @@
     </widget>
    </item>
    <item row="0" column="0">
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="Portrait">
      <property name="maximumSize">
       <size>
        <width>100</width>
