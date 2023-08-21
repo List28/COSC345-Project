@@ -85,8 +85,7 @@ jobs:
               copy C:\Windows\System32\vccorlib140.dll .
               copy C:\Windows\System32\msvcp140.dll .
               copy C:\Windows\System32\vcruntime140.dll .
-              copy parliament.db ${{ runner.temp }} release
-              
+              copy parliament.db ${{ env.SOURCE_DIR }}\qtGuiApplication\release
               
       - name: (9) Zip build
         working-directory: ${{ runner.temp }}
@@ -99,48 +98,3 @@ jobs:
           name: ${{ env.ARTIFACT }}
           path: |
             ${{ runner.temp }}\${{ env.ARTIFACT }}
-            ${{ env.SOURCE_DIR }}/qtGuiApplication/main.cpp
-            ${{ env.SOURCE_DIR }}/qtGuiApplication/mp.cpp
-
-  # run_app:
-  #   runs-on: windows-2019
-  #   needs: build
-  #   steps:
-  #     - name: (1) Checkout repo
-  #       uses: actions/checkout@v2
-  #       with:
-  #         submodules: recursive
-
-  #     - name: (2) Get artifact
-  #       uses: actions/download-artifact@master
-  #       with:
-  #         name: ${{ env.ARTIFACT }}
-
-  #     - name: (3) Unzip artifact
-  #       run: 7z x ${{ env.ARTIFACT }} -o${{ runner.temp }}/build
-
-  #     - name: (4) Run Application
-  #       working-directory: ${{ runner.temp }}/build/release/
-  #       run: .\sqlite_qt.exe
-
-      # - name: (5) Setup OpenCppCoverage and add to Path
-      #   id: setup_opencppcoverage
-      #   run: |
-      #     choco install OpenCppCoverage -y
-      #     echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
-
-      # - name: (6) Generate Report
-      #   id: generate_test_report
-      #   shell: cmd
-      #   run: |
-      #     cd ${{ runner.temp }}/build/release
-      #     OpenCppCoverage.exe --export_type cobertura:qt_application.xml -- sqlite_qt.exe
-        
-      # - name: (7) Upload Report to Codecov
-      #   uses: codecov/codecov-action@v2
-      #   env:
-      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      #   with:
-      #     files: ./qt_application.xml
-      #     fail_ci_if_error: true
-      #     functionalities: fix
