@@ -1,0 +1,18 @@
+﻿  Reading Qt configuration (C:/Qt/6.5.2/msvc2019_64/bin/qmake)
+  card.cpp
+  dbmanager.cpp
+  dialog.cpp
+  expandedcard.cpp
+  finances.cpp
+  main.cpp
+  mainwindow.cpp
+  mp.cpp
+card.cpp(37,36): warning C4100: 'event': unreferenced formal parameter
+dbmanager.cpp(98,9): warning C4189: 'idName': local variable is initialized but not referenced
+dbmanager.cpp(170,9): warning C4189: 'mp_name': local variable is initialized but not referenced
+  qrc_icons.cpp
+  moc_card.cpp
+  moc_dialog.cpp
+  moc_expandedcard.cpp
+  moc_mainwindow.cpp
+  cardTest.vcxproj -> C:\Users\acton\OneDrive\Documents\111_cosc345_project\0000000000000000\COSC345-Project\qtGuiApplication\release\sqlite_qt.exe
