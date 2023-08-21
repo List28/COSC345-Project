@@ -122,3 +122,9 @@ void MainWindow::clearCardsLayout()
         delete item;
     }
 }
+
+void MainWindow::on_filterButton_clicked()
+{
+    qDebug() << "Another day another slay";
+}
+

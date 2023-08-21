@@ -32,6 +32,7 @@ private slots:
     void on_peopleButton_clicked();
     void on_partiesButton_clicked();
     void clearCardsLayout();
+    void on_filterButton_clicked();
 };
 
 #endif // MAINWINDOW_H

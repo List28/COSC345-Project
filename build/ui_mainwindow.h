@@ -50,7 +50,7 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_2;
     QComboBox *comboBox;
-    QPushButton *pushButton;
+    QPushButton *filterButton;
     QSpacerItem *verticalSpacer;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents_2;
@@ -62,7 +62,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(1127, 606);
+        MainWindow->resize(1127, 611);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         gridLayout = new QGridLayout(centralwidget);
@@ -171,10 +171,10 @@ public:
 
         verticalLayout->addWidget(frame_3);
 
-        pushButton = new QPushButton(widget);
-        pushButton->setObjectName("pushButton");
+        filterButton = new QPushButton(widget);
+        filterButton->setObjectName("filterButton");
 
-        verticalLayout->addWidget(pushButton);
+        verticalLayout->addWidget(filterButton);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -236,7 +236,7 @@ public:
         comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "Maori", nullptr));
         comboBox->setItemText(4, QCoreApplication::translate("MainWindow", "ACT", nullptr));
 
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Filter", nullptr));
+        filterButton->setText(QCoreApplication::translate("MainWindow", "Filter", nullptr));
     } // retranslateUi
 
 };
