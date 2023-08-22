@@ -78,6 +78,7 @@ jobs:
               copy ${{ env.SOURCE_DIR }}\images\parties\* parties
               copy ${{ env.SOURCE_DIR }}\images\portraits\* portraits
               cd ..
+              copy ${{ env.SOURCE_DIR }}\qtGuiApplication\release parliament.db .
               copy parliament.db ${{ env.SOURCE_DIR }}\qtGuiApplication\release release
               cd release
               windeployqt --qmldir ${{ env.SOURCE_DIR }}\build\release sqlite_qt.exe --pdb --release --compiler-runtime
