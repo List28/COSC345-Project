@@ -70,6 +70,7 @@ jobs:
         run:  |
               qmake -r ${{ env.SOURCE_DIR }}\qtGuiApplication\cardTest.pro
               ${{ runner.temp }}\jom\jom -j2
+              copy ${{ env.SOURCE_DIR }}\build parliament.db .
               mkdir images
               copy ${{ env.SOURCE_DIR }}\images\* images
               cd images 
@@ -78,8 +79,7 @@ jobs:
               copy ${{ env.SOURCE_DIR }}\images\parties\* parties
               copy ${{ env.SOURCE_DIR }}\images\portraits\* portraits
               cd ..
-              copy ${{ env.SOURCE_DIR }}\qtGuiApplication\release parliament.db .
-              copy parliament.db ${{ env.SOURCE_DIR }}\qtGuiApplication\release release
+              
               cd release
               windeployqt --qmldir ${{ env.SOURCE_DIR }}\build\release sqlite_qt.exe --pdb --release --compiler-runtime
               copy C:\Windows\System32\concrt140.dll . 
