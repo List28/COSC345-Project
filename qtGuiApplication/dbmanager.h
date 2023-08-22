@@ -21,6 +21,8 @@ public:
 
     std::vector<MP> getAllMps();
 
+    std::vector<MP> getAllMpsFromParty(const QString& party);
+
     MP getMpFromName(const QString& name);
     
     std::vector<Finances> getAllFinances();

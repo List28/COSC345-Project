@@ -13,11 +13,12 @@ int main(int argc, char* argv[])
     MainWindow w;
     w.show();
 
+    
     DbManager db(path);
 
     if (db.isOpen())
     {
-        db.createMpsTable();
+       // db.createMpsTable();
         std::vector<MP> mps = db.getAllMps();
         for (size_t i = 0; i < mps.size(); ++i) {
             qDebug() << "===" << mps[i].getName();

@@ -33,6 +33,7 @@ private slots:
     void on_partiesButton_clicked();
     void clearCardsLayout();
     void on_filterButton_clicked();
+    void showMpsOnScreen(std::vector<MP> mps);
 };
 
 #endif // MAINWINDOW_H

@@ -7,6 +7,8 @@
 #include <QBoxLayout>
 #include <dbmanager.h>
 
+static const QString path = "parliament.db";
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -58,15 +60,27 @@ void MainWindow::handleOkButtonClicked()
 
 void MainWindow::on_peopleButton_clicked()
 {
-    static const QString path = "parliament.db";
     DbManager db(path);
     std::vector<MP> mps;
 
     if (db.isOpen())
     {
         mps = db.getAllMps();
+        if (!mps.empty()) 
+        {
+            showMpsOnScreen(mps);
+        }
+        else {
+            qDebug() << "No mps found";
+        }
     }
+    else 
+    {
+        qDebug() << "Couldn't open mps";
+    }    
+}
 
+void MainWindow::showMpsOnScreen(std::vector<MP> mps) {
     clearCardsLayout();
 
     int maxColumns = 3; // Maximum number of cards per row
@@ -125,6 +139,52 @@ void MainWindow::clearCardsLayout()
 
 void MainWindow::on_filterButton_clicked()
 {
-    qDebug() << "Another day another slay";
+    QString searchQuery = ui->searchQuery->text();
+    QString partyQuery = ui->partyQuery->currentText();
+    qDebug() << searchQuery << " " << partyQuery;
+    
+    DbManager db(path);
+    std::vector<MP> mps;
+
+    if (db.isOpen())
+    {
+        if (partyQuery == "All") {
+            mps = db.getAllMps();
+        }
+        else {
+            mps = db.getAllMpsFromParty(partyQuery);
+        }
+        
+        if (!mps.empty())
+        {
+            if (searchQuery.isEmpty()) {
+                showMpsOnScreen(mps);
+            }
+            else {
+                std::vector<MP> filteredMps;
+                for (size_t i = 0; i < mps.size(); ++i) {
+                    if (mps[i].getName().contains(searchQuery)) {
+                        filteredMps.push_back(mps[i]);
+                    }
+                    else if (mps[i].getParty().contains(searchQuery)) {
+                        filteredMps.push_back(mps[i]);
+                    }
+                    else if (mps[i].getElectorate().contains(searchQuery)) {
+                        filteredMps.push_back(mps[i]);
+                    }
+                }
+
+                showMpsOnScreen(filteredMps);
+            }
+            
+        }
+        else {
+            qDebug() << "No mps found";
+        }
+    }
+    else
+    {
+        qDebug() << "Couldn't open mps";
+    }
 }
 

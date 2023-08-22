@@ -118,7 +118,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit">
+           <widget class="QLineEdit" name="searchQuery">
             <property name="maximumSize">
              <size>
               <width>9090909</width>
@@ -171,30 +171,40 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox">
+           <widget class="QComboBox" name="partyQuery">
             <item>
              <property name="text">
-              <string>Labour</string>
+              <string>All</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>National</string>
+              <string>Labour Party</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Green</string>
+              <string>National Party</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Maori</string>
+              <string>Green Party</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>ACT</string>
+              <string>Te Pāti Māori</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>ACT New Zealand</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Independent</string>
              </property>
             </item>
            </widget>
@@ -269,7 +279,7 @@
      <x>0</x>
      <y>0</y>
      <width>1127</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
