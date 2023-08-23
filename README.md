@@ -27,6 +27,9 @@
 ## Codacy Integration
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/1d03bbe8a8cf4618b91768661abe8e03)](https://app.codacy.com/gh/Debug-Divas/COSC345-Project/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
+## Questionnaire
+[![Questionnaire](https://img.shields.io/badge/Questionnaire-Google_form-purple.svg)(https://forms.gle/WD8rRjTr6eL4nhxh6)
+
 ## Trello
 [![Task manager](https://img.shields.io/badge/Task_manager-Trello-red.svg)](https://trello.com/b/0s8Y3Pmd/cosc345)
 
