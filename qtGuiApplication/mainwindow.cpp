@@ -163,7 +163,8 @@ void MainWindow::on_filterButton_clicked()
             else {
                 std::vector<MP> filteredMps;
                 for (size_t i = 0; i < mps.size(); ++i) {
-                    if (mps[i].getName().contains(searchQuery)) {
+                    if (mps[i].getName().toUpper().contains(searchQuery.toUpper())) {
+                        qDebug() << mps[i].getName().toUpper();
                         filteredMps.push_back(mps[i]);
                     }
                     else if (mps[i].getParty().contains(searchQuery)) {
